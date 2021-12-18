@@ -28,7 +28,8 @@ function modelLoaded(){
 function gotPoses(results){
    if (results.length > 0){
        console.log(results);
-
+       scorerightWrist=results[0].pose.keypoints[10].score;
+       console.log("scorerightWrist= "+ scorerightWrist);
        leftWristX=results[0].pose.leftWrist.x;
        leftWristY=results[0].pose.leftWrist.y;
        console.log("leftWristX= "+leftWristX+"leftWristY= "+leftWristY);
@@ -42,6 +43,28 @@ function gotPoses(results){
 function draw(){
 
     image(video, 0, 0, 600, 500);
+
+    fill('#FF0000');
+    stroke('#FF0000');
+
+    circle(rightWristX, rightWristY, 20);
+    if(scorerightWrist > 0.2){
+
+
+        circle(rightWristX, rightWristY, 20);
+        song1.play;
+        song1.isPlaying();
+        song2.stop();
+    }
+
+    if(scoreleftWrist > 0.2){
+
+
+        circle(leftWristX, leftWristY, 20);
+        song2.play;
+        song2.isPlaying();
+song1.stop();
+    }
     
 }
 
